@@ -1,3 +1,14 @@
+//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+//! @file  
+//!
+//! @brief 
+//!
+//! @date   “ú•t
+//!
+//! @author §ìÒ–¼	Œã“¡«“l
+//__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
+
+#include "GameMain.h"
 #include "Bullet.h"
 
 #include <d3d11.h>
@@ -6,20 +17,20 @@
 using namespace DirectX::SimpleMath;
 using namespace DirectX;
 
-Bullet::Bullet(Vector2 pos)
+Bullet::Bullet(float x, float y)
 {
-	grp_h = 16*2;
-	grp_w = 16*2;
+	handle = new Texture(L"Resources\\images\\puttyo2.png");
+
+	handle = g_BulletImage;
 	grp_x = 0;
 	grp_y = 0;
-
-	pos_x = pos.x - GetGrpW();
-	pos_y = pos.y;
-
-	spd_x = 2;
-	spd_y = 2;
-
-	handle = new Texture(L"Resources\\images\\puttyo2.png");
+	grp_w = 16;
+	grp_h = 16;
+	pos_x = x + 20.0f;
+	pos_y = y;
+	spd_x = 0.0f;
+	spd_y = 0.0f;
+	state = 0;
 
 }
 
@@ -45,4 +56,20 @@ void Bullet::CurveShot(int Player_pos_y)
 		pos_y -= 12;
 		pos_x -= spd_x;
 	}
+}
+
+void Bullet::BulletPos(float x, float y)
+{
+	pos_x = x + 20.0f;
+	pos_y = y;
+
+}
+
+void Bullet::LostBullet()
+{
+	if (pos_x >= 656.0f)
+	{
+		state = 0;
+	}
+
 }

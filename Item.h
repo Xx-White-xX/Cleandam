@@ -1,5 +1,5 @@
 //__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
-//! @file   íeä€ÇÃèàóù
+//! @file   
 //!
 //! @brief 
 //!
@@ -12,25 +12,14 @@
 #pragma once
 
 #include "ObjectBase.h"
-#include <d3d11.h>
-#include <SimpleMath.h>
 
-class Bullet :public ObjectBase
+class Item :public ObjectBase
 {
-private:
 
 public:
 
-	Bullet(float x, float y);
+	Item();
 
-	~Bullet();
-
-	void BulletPos(float x, float y);
-
-	void LostBullet();
-
-	void ShotMove();	//í èÌíe
-
-	void CurveShot(int pos_y);
+	~Item();
 
 };
