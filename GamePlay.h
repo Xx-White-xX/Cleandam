@@ -15,12 +15,15 @@
 
 #include "../Enemy.h"
 #include "../Bullet.h"
+#include "../Player.h"
 
 class GamePlay :public GameBase
 {
 private:
 
 	Enemy* enemy;
+
+	Funnel* funnnel[2];
 
 	int enemy_count;
 
@@ -29,4 +32,7 @@ public:
 	~GamePlay();
 	int Update();
 	void Render();
+
+	void EnemyCreate();
+	void EnemyLost();
 };

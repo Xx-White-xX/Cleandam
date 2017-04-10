@@ -11,8 +11,12 @@
 // ヘッダファイルの読み込み ================================================
 #include "GameMain.h"
 #include "GamePlay.h"
+#include "../Player.h"
+
 using namespace DirectX::SimpleMath;
 using namespace DirectX;
+
+bool collston(Enemy* enemy, Funnel* funnel1, Funnel* funnel2);
 //----------------------------------------------------------------------
 //! @brief コンストラクタ
 //!
@@ -52,30 +56,44 @@ GamePlay::~GamePlay()
 //----------------------------------------------------------------------
 int GamePlay::Update(void)
 {
-	enemy->Move();
-
-	if (enemy->GetPosX() == 120)
+	if (enemy != nullptr)
 	{
-		int randm =0;
+		enemy->Move();
 
-		//randm = rand() % 2;
+		if (enemy->GetPosX() == 120)
 		{
-			if (randm == 0)
+			int randm = 0;
+
+			randm = rand() % 2;
+
 			{
-				enemy->ChangeMobe();
+				if (randm == 0)
+				{
+					enemy->ChangeMobe();
+				}
 			}
 		}
-	}
 
-	//if (g_keyTracker->pressed.Space)
-	//{
-	//	return  CLEAR;
-	//}
-	//
-	//if (g_keyTracker->pressed.A)
-	//{
-	//	return OVER;
-	//}
+		//if (g_keyTracker->pressed.Space)
+		//{
+		//	return  CLEAR;
+		//}
+		//
+		//if (g_keyTracker->pressed.A)
+		//{
+		//	return OVER;
+		//}
+
+		enemy->BulletDown();
+
+		//ファンネルを連結した後
+		if (/*(collston(enemy, funnnel[0], funnnel[1]) == true) ||*/
+			(enemy->GetPosX() <= 0) ||
+			(enemy->GetPosX() >= 640))
+		{
+			EnemyLost();
+		}
+	}
 
 	return PLAY;
 }
@@ -91,42 +109,52 @@ int GamePlay::Update(void)
 //----------------------------------------------------------------------
 void GamePlay::Render(void)
 {
-	//ここで描画
-	enemy->Render();
-
-	if (g_keyTracker->released.Space)
+	if (enemy != nullptr)
 	{
+		//ここで描画
+		enemy->Render();
+
 		enemy->Shot();
-	}
 
-	if (enemy->GoShot() == true)
-	{
-		enemy->on();
-		enemy->BulletMove();
-	}
+		if (enemy->GoShot() == true)
+		{
+			enemy->on();
+			enemy->BulletMove();
+		}
 
-	//消える
-	if (enemy->GoShot() == true)
-	{
-		enemy->Lost();
+		//消える
+		if (enemy->GoShot() == true)
+		{
+			enemy->Lost();
+		}
 	}
+}
+
+void GamePlay::EnemyCreate()
+{
+	Vector2 enemypos;
+
+	enemypos.x = 0;
+	enemypos.y = 0;
+
+	enemy = new Enemy(enemypos);
+}
+
+void GamePlay::EnemyLost()
+{
+	enemy = nullptr;
+	delete enemy;
 }
 
 
 
-int collston(Enemy* enemy , OBJECT B)
+bool collston(Enemy* enemy , Funnel* funnel0, Funnel* funnel1)
 {
-	float x1 = enemy->GetPosX() + (enemy->GetGrpW() / 2);		//中心座標x
-	float y1 = enemy->GetPosY() + (enemy->GetGrpH() / 2);		//中心座標y
-	float x2 = B.pos_x + (B.grp_w / 2);
-	float y2 = B.pos_y + (B.grp_h / 2);
-
-	float r1 = A.grp_w / 2;
-	float r2 = B.grp_w / 2;
-
-	if ((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) <= (r1 + r2)*(r1 + r2))
+	if ((funnel0->GetPosY() + funnel0->GetGrpW() == enemy->GetSpdY() && funnel0->GetPosX() <= enemy->GetPosX() && funnel0->GetPosX() + funnel0->GetGrpW() >= enemy->GetPosX()) &&
+		(funnel1->GetPosY() == enemy->GetPosY() + enemy->GetGrpH() && funnel1->GetPosX() <= enemy->GetPosX() && funnel1->GetPosX() + funnel1->GetGrpW() >= enemy->GetPosX()))
 	{
-		return 1;
+		return true;
 	}
-	return 0;
+
+	return false;
 }
