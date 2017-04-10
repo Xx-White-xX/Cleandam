@@ -14,6 +14,7 @@
 //ヘッダファイルのインクルード
 #include "GameBase.h"
 #include "ObjectBase.h"
+#include "PBullet.h"
 
 class Player: public ObjectBase
 {
@@ -21,7 +22,7 @@ private:
 	//プレイヤーの移動速度
 	static float m_speed;
 	//プレイヤーの残機
-	static int m_lives;
+	int m_lives;
 
 	//弾の数
 	int m_bullet;
@@ -34,11 +35,7 @@ public:
 
 	//プレイヤーの移動処理
 	void PlayerMove(Player* player, float dir);
-	//プレイヤーの攻撃処理
-	void Attack();
 	//プレイヤーの死亡処理
-	void PlayerDeath();
-	//プレイヤーのアイテム取得処理
-	void PlayerGetItem();
+	void PlayerDeath(PBullet* collender);
 
 };

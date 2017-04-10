@@ -14,22 +14,16 @@
 #include "GameBase.h"
 #include "ObjectBase.h"
 
-#define BULLET_MAX 50
-
 class PBullet :public ObjectBase
 {
 private:
 	//’e‚Ì”
-	int bullet[BULLET_MAX];
+	bool m_col;
 
 public:
 	PBullet();
 	~PBullet();
 
 	//’e‚Ì”­Ë
-	void Create();
-	//’e‚ÌÁ‹
-	void Delete();
-
-
+	bool distinction();
 };

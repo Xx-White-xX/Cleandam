@@ -42,6 +42,7 @@ Player::Player()
 
 	state = 1;
 
+	m_lives = 3;
 }
 
 //----------------------------------------------------------------------
@@ -64,7 +65,7 @@ void Player::PlayerMove(Player* player, float dir)
 	//キー入力処理
 	if (g_keyTracker->lastState.Right)
 	{
-		if (player->GetPosX() <= SCREEN_WIDTH / 2)
+		if (player->GetPosX() <= SCREEN_WIDTH)
 		{
 			player->SetSpdX(dir);
 			player->SetSpdY(0);
@@ -135,31 +136,15 @@ void Player::PlayerMove(Player* player, float dir)
 //=
 //= @return ステータス値
 //__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
-void Player::Attack()
+void Player::PlayerDeath(PBullet* collender)
 {
+	if (collender->distinction() == true)
+	{
+		m_lives--;
 
-}
-
-//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
-//= @brief ステータスを決める
-//=
-//= @param[in] 各能力
-//=
-//= @return ステータス値
-//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
-void Player::PlayerDeath()
-{
-
-}
-
-//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
-//= @brief ステータスを決める
-//=
-//= @param[in] 各能力
-//=
-//= @return ステータス値
-//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
-void Player::PlayerGetItem()
-{
-
+		if (m_lives == 0)
+		{
+			g_NextScene = OVER;
+		}
+	}
 }

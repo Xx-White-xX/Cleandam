@@ -27,58 +27,51 @@ using namespace DirectX;
 //----------------------------------------------------------------------
 PBullet::PBullet()
 {
+	Texture* PBimage = new Texture(L"Resources\\Images\\tate.png");
 
+	handle = PBimage;
+
+	pos_x = 160;
+	pos_y = 240;
+	spd_x = 0.0f;
+	spd_y = 0.0f;
+
+	grp_w = 48;
+	grp_h = 16;
+	grp_x = 16;
+	grp_y = 16;
+
+	state = 0;
+
+	m_col = false;
 }
 
-//----------------------------------------------------------------------
-//! @brief デストラクタ
-//!
-//! @param[in] なし
-//!
-//! @return なし
-//----------------------------------------------------------------------
+//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
+//= @brief ステータスを決める
+//=
+//= @param[in] 各能力
+//=
+//= @return ステータス値
+//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
 PBullet::~PBullet()
 {
 
 }
 
-//----------------------------------------------------------------------
-//! @brief タイトル処理
-//!
-//! @param[in] なし
-//!
-//! @return なし
-//----------------------------------------------------------------------
-void PBullet::Create()
+//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
+//= @brief ステータスを決める
+//=
+//= @param[in] 各能力
+//=
+//= @return ステータス値
+//__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|__|
+bool PBullet::distinction()
 {
-	if (g_init == 0)
-	{
-		g_init = 1;
+	//if ((enemy.pos_x <= player.pos_x + player.grp_w) && (enemy.pos_x + enemy.grp_w >= player.pos_x) &&
+	//	(enemy.pos_y <= player.pos_y + player.grp_h) && (enemy.pos_y + enemy.grp_h >= player.pos_y))
+	//{
+	//	m_col = true;
+	//}
 
-		g_TimeCnt = 0;
-
-		//ADX2Le::Play(CRI_CUESHEET_0_NC86372);
-
-	}
-
-	//g_TimeCnt++;
-	//if (g_TimeCnt > 180)
-	if (g_keyTracker->pressed.Space)
-	{
-		g_NextScene = PLAY;
-	}
-
-}
-
-//----------------------------------------------------------------------
-//! @brief タイトル描画処理
-//!
-//! @param[in] なし
-//!
-//! @return なし
-//----------------------------------------------------------------------
-void PBullet::Delete()
-{
-	swprintf_s(buf, L"Title");
-	g_spriteFont->DrawString(g_spriteBatch.get(), buf, Vector2(0, 20));
+	return m_col;
 }
