@@ -17,7 +17,6 @@
 #include "../Enemy.h"
 #include "../Stage.h"
 #include "../Boss.h"
-#include "../Bullet.h"
 #include "Player.h"
 #include "Bullet.h"
 #include "Item.h"
@@ -47,6 +46,7 @@ private:
 
 	Enemy* enemy;
 
+	Funnel* funnnel[2];
 
 	int enemy_count;
 
@@ -57,4 +57,6 @@ public:
 	void Update();
 	void Render();
 
+	void EnemyCreate();
+	void EnemyLost();
 };
