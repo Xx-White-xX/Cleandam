@@ -23,6 +23,8 @@ Enemy::Enemy(Vector2 pos)
 	pos_x = pos.x;
 	pos_y = pos.y;
 
+	m_BulletType = rand() % 2;
+
 	//ここで定義
 	handle = new Texture(L"enemy.png");
 }
@@ -109,5 +111,15 @@ void Enemy::on()
 
 void Enemy::BulletMove()
 {
-	m_Bullet->ShotMove();
+	switch (m_BulletType)
+	{
+	case 0:
+		m_Bullet->ShotMove();
+		break;
+
+	case 1:
+		//引数、プレイヤーのy座標
+		//m_Bullet->CurveShot();
+		break;
+	}
 }
