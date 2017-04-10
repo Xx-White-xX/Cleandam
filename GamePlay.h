@@ -12,6 +12,7 @@
 #pragma once
 
 #include "GameBase.h"
+
 #include "../Enemy.h"
 #include "../Stage.h"
 #include "../Boss.h"
@@ -25,6 +26,7 @@ private:
 	Stage* stage;
 	Boss* boss;
 	
+
 	int enemy_count;
 
 public:

@@ -14,7 +14,7 @@ Bullet::Bullet(Vector2 pos)
 	grp_y = 0;
 
 	pos_x = pos.x - GetGrpW();
-	pos_y = pos.y;// -(GetGrpH() / 2);
+	pos_y = pos.y;
 
 	spd_x = 2;
 	spd_y = 2;
