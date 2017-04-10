@@ -12,18 +12,17 @@
 #pragma once
 
 #include "GameBase.h"
+
 #include "../Enemy.h"
-#include "Stage.h"
-#include "Boss.h"
+#include "../Bullet.h"
 
 class GamePlay :public GameBase
 {
 private:
 
 	Enemy* enemy;
-	Stage* stage;
-	Boss* boss;
-	
+
+	int enemy_count;
 
 public:
 	GamePlay();
