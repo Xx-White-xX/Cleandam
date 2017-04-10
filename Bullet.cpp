@@ -19,7 +19,7 @@ Bullet::Bullet(Vector2 pos)
 	spd_x = 2;
 	spd_y = 2;
 
-	handle = new Texture(L"enemy.png");
+	handle = new Texture(L"Resources\\images\\puttyo2.png");
 
 }
 
@@ -35,7 +35,7 @@ void Bullet::ShotMove()
 
 void Bullet::CurveShot(int Player_pos_y)
 {
-	if (Player_pos_y + (GetGrpH() / 2) <= GetPosY())
+	if (Player_pos_y <= GetPosY())
 	{
 		pos_y += 12;
 		pos_x -= spd_x;

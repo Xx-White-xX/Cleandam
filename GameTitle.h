@@ -12,7 +12,7 @@
 #pragma once
 
 #include "GameBase.h"
-#include "image.h"
+#include "../image.h"
 
 class GameTitle :public GameBase
 {

@@ -16,5 +16,5 @@ public:
 
 	void ShotMove();	//’Êí’e
 
-	void CurveShot(int pos_y);		//ã‰º’Ç”ö’e
+	void CurveShot(int pos_y);
 };
